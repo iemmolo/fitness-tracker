@@ -13,7 +13,6 @@ export function DataExport() {
       workoutSchedule: getStorageItem(STORAGE_KEYS.WORKOUT_SCHEDULE, DEFAULT_PLAN),
       workoutLogs: getStorageItem(STORAGE_KEYS.WORKOUT_LOGS, []),
       activeWorkout: getStorageItem(STORAGE_KEYS.ACTIVE_WORKOUT, null),
-      walkLogs: getStorageItem(STORAGE_KEYS.WALK_LOGS, []),
       exportedAt: new Date().toISOString(),
     }
 

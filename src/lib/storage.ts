@@ -2,7 +2,6 @@ export const STORAGE_KEYS = {
   WORKOUT_SCHEDULE: "fitness-tracker:workout-schedule",
   WORKOUT_LOGS: "fitness-tracker:workout-logs",
   ACTIVE_WORKOUT: "fitness-tracker:active-workout",
-  WALK_LOGS: "fitness-tracker:walk-logs",
 } as const
 
 export function getStorageItem<T>(key: string, fallback: T): T {

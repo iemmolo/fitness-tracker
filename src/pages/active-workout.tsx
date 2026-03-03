@@ -16,6 +16,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
+import type { CardioType } from "@/types"
 
 export default function ActiveWorkoutPage() {
   const navigate = useNavigate()
@@ -24,6 +25,7 @@ export default function ActiveWorkoutPage() {
     toggleSet,
     updateWeight,
     updateAllWeights,
+    setCardioType,
     completeWorkout,
     discardWorkout,
   } = useActiveWorkout()
@@ -49,6 +51,11 @@ export default function ActiveWorkoutPage() {
     discardWorkout()
     navigate("/", { replace: true })
   }
+
+  const cardioOptions: { value: CardioType; label: string }[] = [
+    { value: "gym-cardio", label: "Gym Cardio" },
+    { value: "walk", label: "Walk" },
+  ]
 
   return (
     <div className="space-y-4">
@@ -82,6 +89,21 @@ export default function ActiveWorkoutPage() {
       </div>
 
       <Progress value={completionPct} className="h-2" />
+
+      {/* Cardio Type */}
+      <div className="flex gap-2">
+        {cardioOptions.map((opt) => (
+          <Button
+            key={opt.value}
+            variant={activeWorkout.cardioType === opt.value ? "default" : "outline"}
+            size="sm"
+            className="flex-1"
+            onClick={() => setCardioType(opt.value)}
+          >
+            {opt.label}
+          </Button>
+        ))}
+      </div>
 
       <div className="space-y-4">
         {activeWorkout.exercises.map((exercise, i) => (

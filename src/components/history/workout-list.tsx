@@ -23,6 +23,11 @@ function WorkoutItem({ log }: { log: WorkoutLog }) {
               <p className="text-xs text-muted-foreground">{formatDate(log.date)}</p>
             </div>
             <div className="flex items-center gap-2">
+              {log.cardioType && (
+                <Badge variant="outline">
+                  {log.cardioType === "gym-cardio" ? "Gym Cardio" : "Walk"}
+                </Badge>
+              )}
               <Badge variant={log.completionPercent === 100 ? "default" : "secondary"}>
                 {log.completionPercent}%
               </Badge>

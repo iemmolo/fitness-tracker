@@ -23,7 +23,7 @@ export const DEFAULT_PLAN: WorkoutSchedule = {
       id: "full-body-b",
       name: "Full Body B — Posterior Chain",
       exercises: [
-        { id: "rdl", name: "Romanian Deadlift", sets: 4, reps: 8, weightKg: 50 },
+        { id: "seated-row", name: "Seated Row", sets: 4, reps: 8, weightKg: 50 },
         { id: "incline-db-press", name: "Incline DB Press", sets: 3, reps: 10, weightKg: 16 },
         { id: "lat-pulldown", name: "Lat Pulldown", sets: 3, reps: 10, weightKg: 45 },
         { id: "leg-curl", name: "Leg Curl", sets: 3, reps: 12, weightKg: 30 },

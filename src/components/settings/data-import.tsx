@@ -32,7 +32,6 @@ export function DataImport({ onImported }: DataImportProps) {
         if (data.activeWorkout) {
           setStorageItem(STORAGE_KEYS.ACTIVE_WORKOUT, data.activeWorkout)
         }
-        setStorageItem(STORAGE_KEYS.WALK_LOGS, data.walkLogs ?? [])
 
         toast.success("Data restored successfully")
         onImported()

@@ -21,6 +21,9 @@ export interface WorkoutSchedule {
   templates: WorkoutTemplate[]
 }
 
+// Cardio type tracked per workout
+export type CardioType = "gym-cardio" | "walk"
+
 // Completed workout logs
 export interface SetLog {
   setNumber: number
@@ -45,6 +48,7 @@ export interface WorkoutLog {
   completedAt?: string // ISO datetime
   exercises: ExerciseLog[]
   completionPercent: number
+  cardioType?: CardioType
 }
 
 // In-progress workout (persisted to localStorage for crash resilience)
@@ -54,12 +58,7 @@ export interface ActiveWorkout {
   date: string // ISO date string YYYY-MM-DD
   startedAt: string // ISO datetime
   exercises: ExerciseLog[]
-}
-
-// Walk tracking
-export interface WalkLog {
-  date: string // ISO date string YYYY-MM-DD
-  completed: boolean
+  cardioType?: CardioType
 }
 
 // Data export/import
@@ -68,6 +67,5 @@ export interface AppData {
   workoutSchedule: WorkoutSchedule
   workoutLogs: WorkoutLog[]
   activeWorkout: ActiveWorkout | null
-  walkLogs: WalkLog[]
   exportedAt: string
 }

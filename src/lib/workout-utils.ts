@@ -34,5 +34,6 @@ export function activeWorkoutToLog(active: ActiveWorkout, id: string): WorkoutLo
     completedAt: new Date().toISOString(),
     exercises: active.exercises,
     completionPercent: calcCompletionPercent(active.exercises),
+    cardioType: active.cardioType,
   }
 }

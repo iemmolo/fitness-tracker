@@ -12,7 +12,6 @@ import {
 import { Card, CardContent } from "@/components/ui/card"
 import { ChartContainer, ChartTooltipContent } from "@/components/ui/chart"
 import { useWorkoutLogs } from "@/hooks/use-workout-logs"
-import { useWalkLogs } from "@/hooks/use-walk-logs"
 import {
   computeWeeklyFrequency,
   computeWeightProgression,
@@ -22,7 +21,6 @@ import {
 
 const frequencyConfig = {
   workouts: { label: "Workouts", color: "var(--color-primary)" },
-  walks: { label: "Walks", color: "var(--color-muted-foreground)" },
 }
 
 const weightConfig = {
@@ -35,13 +33,12 @@ const completionConfig = {
 
 export default function AnalyticsPage() {
   const { logs } = useWorkoutLogs()
-  const { walkLogs } = useWalkLogs()
   const [selectedExercise, setSelectedExercise] = useState("")
 
   const exercises = useMemo(() => getUniqueExercises(logs), [logs])
   const frequencyData = useMemo(
-    () => computeWeeklyFrequency(logs, walkLogs),
-    [logs, walkLogs]
+    () => computeWeeklyFrequency(logs),
+    [logs]
   )
   const completionData = useMemo(() => computeCompletionRate(logs), [logs])
 
@@ -51,7 +48,7 @@ export default function AnalyticsPage() {
     [logs, exerciseId]
   )
 
-  const hasData = logs.length > 0 || walkLogs.length > 0
+  const hasData = logs.length > 0
 
   if (!hasData) {
     return (
@@ -60,7 +57,7 @@ export default function AnalyticsPage() {
         <Card>
           <CardContent className="py-12 text-center">
             <p className="text-muted-foreground">
-              Complete some workouts or log walks to see your analytics here.
+              Complete some workouts to see your analytics here.
             </p>
           </CardContent>
         </Card>
@@ -83,7 +80,6 @@ export default function AnalyticsPage() {
               <YAxis allowDecimals={false} fontSize={10} tickLine={false} axisLine={false} width={24} />
               <Tooltip content={<ChartTooltipContent />} />
               <Bar dataKey="workouts" fill="var(--color-workouts)" radius={[4, 4, 0, 0]} />
-              <Bar dataKey="walks" fill="var(--color-walks)" radius={[4, 4, 0, 0]} />
             </BarChart>
           </ChartContainer>
         </CardContent>

@@ -2,7 +2,7 @@ import { useLocalStorage } from "./use-local-storage"
 import { STORAGE_KEYS } from "@/lib/storage"
 import { createExerciseLogs, activeWorkoutToLog } from "@/lib/workout-utils"
 import { getTodayISO } from "@/lib/date-utils"
-import type { ActiveWorkout, WorkoutTemplate, WorkoutLog, ExerciseLog } from "@/types"
+import type { ActiveWorkout, WorkoutTemplate, WorkoutLog, ExerciseLog, CardioType } from "@/types"
 
 export function useActiveWorkout() {
   const [activeWorkout, setActiveWorkout, clearActiveWorkout] =
@@ -18,6 +18,13 @@ export function useActiveWorkout() {
     }
     setActiveWorkout(workout)
     return workout
+  }
+
+  function setCardioType(cardioType: CardioType) {
+    setActiveWorkout((prev) => {
+      if (!prev) return prev
+      return { ...prev, cardioType }
+    })
   }
 
   function toggleSet(exerciseIndex: number, setIndex: number) {
@@ -81,6 +88,7 @@ export function useActiveWorkout() {
     toggleSet,
     updateWeight,
     updateAllWeights,
+    setCardioType,
     completeWorkout,
     discardWorkout,
   }

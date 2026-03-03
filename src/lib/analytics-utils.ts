@@ -1,10 +1,9 @@
 import { format, parseISO, startOfWeek, subWeeks } from "date-fns"
-import type { WorkoutLog, WalkLog } from "@/types"
+import type { WorkoutLog } from "@/types"
 
 export interface WeeklyFrequencyPoint {
   week: string
   workouts: number
-  walks: number
 }
 
 export interface WeightProgressionPoint {
@@ -25,7 +24,6 @@ export interface ExerciseOption {
 
 export function computeWeeklyFrequency(
   workoutLogs: WorkoutLog[],
-  walkLogs: WalkLog[],
   weeks = 12
 ): WeeklyFrequencyPoint[] {
   const now = new Date()
@@ -43,13 +41,7 @@ export function computeWeeklyFrequency(
       return d >= weekStart && d <= weekEnd
     }).length
 
-    const walks = walkLogs.filter((log) => {
-      if (!log.completed) return false
-      const d = parseISO(log.date)
-      return d >= weekStart && d <= weekEnd
-    }).length
-
-    result.push({ week: weekLabel, workouts, walks })
+    result.push({ week: weekLabel, workouts })
   }
 
   return result
